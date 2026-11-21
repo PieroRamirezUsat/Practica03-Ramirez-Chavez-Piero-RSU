@@ -1,0 +1,323 @@
+/* ==========================================================================
+   Avance 05 (permisos de usuario): solo la maquetación propia de la pantalla.
+   Colores, tarjetas, insignias y botones son los de tads.css (paleta RSU: pizarra, esmeralda, ámbar, ladrillo).
+   ========================================================================== */
+
+/* ---------- Franja de «Configurar permisos de acceso» ---------- */
+.pm-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 16px 20px;
+    border-radius: var(--t-radio-lg);
+    background: var(--rsu-slate-900);
+    color: #ffffff;
+    box-shadow: var(--t-sombra);
+}
+
+.pm-banner h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.pm-banner p {
+    margin: 2px 0 0;
+    font-size: 0.85rem;
+    color: var(--rsu-slate-300);
+}
+
+.pm-contador {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.pm-todos,
+.pm-todo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+}
+
+.pm-todos {
+    padding: 8px 14px;
+    border-radius: var(--t-radio);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.pm-todos input,
+.pm-todo input {
+    width: 1.1rem;
+    height: 1.1rem;
+    cursor: pointer;
+    accent-color: var(--rsu-emerald-600);
+}
+
+.pm-todos input:disabled,
+.pm-todo input:disabled {
+    cursor: not-allowed;
+}
+
+/* ---------- Tarjeta de cada módulo ---------- */
+.pm-modulo {
+    height: 100%;
+}
+
+.pm-modulo-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--rsu-slate-200);
+    background: var(--rsu-slate-50);
+}
+
+.pm-modulo-cabecera h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--rsu-slate-900);
+}
+
+.pm-modulo-cabecera .pm-todo {
+    color: var(--rsu-slate-600);
+    font-size: 0.85rem;
+}
+
+.pm-modulo-cuerpo {
+    padding: 6px 18px 14px;
+}
+
+.pm-recurso {
+    padding-top: 12px;
+}
+
+.pm-recurso h4 {
+    margin: 0 0 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rsu-slate-200);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--rsu-emerald-800);
+}
+
+.pm-permisos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 8px;
+}
+
+/* ---------- Cada permiso (casilla con insignia por acción) ---------- */
+.pm-permiso {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 8px 10px;
+    border: 1px solid var(--rsu-slate-200);
+    border-radius: var(--t-radio);
+    background: var(--rsu-slate-50);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.pm-permiso:hover:not(.pm-bloqueado) {
+    border-color: var(--rsu-emerald-600);
+}
+
+.pm-permiso.pm-activo {
+    border-color: var(--rsu-emerald-600);
+    background: var(--rsu-emerald-50);
+}
+
+.pm-permiso.pm-bloqueado {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.pm-icono {
+    flex: 0 0 auto;
+    padding: 4px 7px;
+}
+
+.pm-texto {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.2;
+}
+
+.pm-texto strong {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--rsu-slate-900);
+}
+
+.pm-texto small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.68rem;
+    color: var(--rsu-slate-500);
+}
+
+.pm-permiso input {
+    flex: 0 0 auto;
+    width: 1.05rem;
+    height: 1.05rem;
+    cursor: inherit;
+    accent-color: var(--rsu-emerald-600);
+}
+
+/* ---------- Barra para guardar (siempre visible al final) ---------- */
+.pm-barra-guardar {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin: 16px -4px 0;
+    padding: 12px 16px;
+    border: 1px solid var(--rsu-slate-200);
+    border-radius: var(--t-radio-lg);
+    background: #ffffff;
+    box-shadow: var(--t-sombra-lg);
+}
+
+.pm-contador-barra {
+    margin-right: auto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rsu-slate-600);
+}
+
+@media (max-width: 575.98px) {
+    .pm-permisos {
+        grid-template-columns: 1fr;
+    }
+
+    .pm-barra-guardar {
+        justify-content: stretch;
+    }
+
+    .pm-barra-guardar .btn {
+        flex: 1 1 auto;
+    }
+}
+
+/* ---------- Plantillas para cargar en la pantalla de permisos ---------- */
+.pm-plantillas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border: 1px dashed var(--rsu-slate-300);
+    border-radius: var(--t-radio-lg);
+    background: #ffffff;
+}
+
+.pm-plantillas-titulo {
+    margin-right: 4px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--rsu-slate-700);
+}
+
+/* ---------- Pantalla «Perfiles de usuario»: matriz de perfiles por módulo ---------- */
+.pf-leyenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin-bottom: 14px;
+    font-size: 0.8rem;
+    color: var(--rsu-slate-600);
+}
+
+.pf-leyenda .t-insignia {
+    margin-right: 4px;
+}
+
+.pf-matriz td {
+    vertical-align: middle;
+}
+
+.pf-perfil {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 280px;
+}
+
+.pf-perfil strong {
+    display: block;
+    color: var(--rsu-slate-900);
+}
+
+.pf-perfil small {
+    display: block;
+    max-width: 320px;
+    font-size: 0.76rem;
+    line-height: 1.3;
+    color: var(--rsu-slate-500);
+}
+
+.pf-icono {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    border-radius: var(--t-radio);
+    font-size: 1.15rem;
+}
+
+.pf-persona {
+    display: inline-block;
+    margin: 2px 4px 2px 0;
+    padding: 2px 9px;
+    border: 1px solid var(--rsu-slate-300);
+    border-radius: var(--t-radio-pill);
+    background: var(--rsu-slate-50);
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--rsu-slate-800);
+    white-space: nowrap;
+}
+
+.pf-inactivo {
+    opacity: 0.55;
+    text-decoration: line-through;
+}
+
+.pf-mas {
+    background: var(--rsu-slate-200);
+}
+
+/* Los botones de plantilla son acciones neutras (no «cancelar»): contorno gris y verde al pasar el cursor. */
+.btn.t-boton-cancelar.pm-plantilla {
+    border: 1px solid var(--rsu-slate-300);
+    background: #ffffff;
+    color: var(--rsu-slate-800);
+}
+
+.btn.t-boton-cancelar.pm-plantilla:hover {
+    border-color: var(--rsu-emerald-600);
+    background: var(--rsu-emerald-50);
+    color: var(--rsu-emerald-800);
+}
