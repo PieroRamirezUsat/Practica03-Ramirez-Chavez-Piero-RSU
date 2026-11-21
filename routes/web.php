@@ -6,9 +6,12 @@ use App\Http\Controllers\Admin\CambioController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\ContratoController;
 use App\Http\Controllers\Admin\DashboardProgramacionController;
+use App\Http\Controllers\Admin\DiaMantenimientoController;
 use App\Http\Controllers\Admin\FeriadoController;
 use App\Http\Controllers\Admin\GrupoPersonalController;
+use App\Http\Controllers\Admin\HorarioMantenimientoController;
 use App\Http\Controllers\Admin\InicioController;
+use App\Http\Controllers\Admin\MantenimientoController;
 use App\Http\Controllers\Admin\MarcaController;
 use App\Http\Controllers\Admin\ModeloController;
 use App\Http\Controllers\Admin\MotivoController;
@@ -53,6 +56,19 @@ Route::middleware([...$protegidas, VerificarPermiso::class])->prefix('admin')->g
     Route::post('vehiculos/{vehiculo}/imagenes', [VehiculoController::class, 'guardarImagenes'])->name('admin.vehiculos.imagenes.guardar');
     Route::get('vehiculos/buscar', [VehiculoController::class, 'buscar'])->name('admin.vehiculos.buscar');
     Route::resource('vehiculos', VehiculoController::class)->names('admin.vehiculos');
+
+    // ---- PRÁCTICA 03: Mantenimiento de vehículos (mantenimiento → horarios → días generados)
+    // El permiso de cada ruta sale de su nombre (admin.mantenimientos.<...>.<acción>) → maintenances.view/create/edit/delete.
+    Route::resource('mantenimientos', MantenimientoController::class)->except('show')->names('admin.mantenimientos')->parameters(['mantenimientos' => 'mantenimiento']);
+    Route::get('mantenimientos/{mantenimiento}/horarios', [HorarioMantenimientoController::class, 'index'])->name('admin.mantenimientos.horarios.index');
+    Route::get('mantenimientos/{mantenimiento}/horarios/create', [HorarioMantenimientoController::class, 'create'])->name('admin.mantenimientos.horarios.create');
+    Route::post('mantenimientos/{mantenimiento}/horarios', [HorarioMantenimientoController::class, 'store'])->name('admin.mantenimientos.horarios.store');
+    Route::get('horarios-mantenimiento/{horario}/edit', [HorarioMantenimientoController::class, 'edit'])->name('admin.mantenimientos.horarios.edit');
+    Route::put('horarios-mantenimiento/{horario}', [HorarioMantenimientoController::class, 'update'])->name('admin.mantenimientos.horarios.update');
+    Route::delete('horarios-mantenimiento/{horario}', [HorarioMantenimientoController::class, 'destroy'])->name('admin.mantenimientos.horarios.destroy');
+    Route::get('horarios-mantenimiento/{horario}/dias', [DiaMantenimientoController::class, 'index'])->name('admin.mantenimientos.dias.index');
+    Route::get('dias-mantenimiento/{dia}/edit', [DiaMantenimientoController::class, 'edit'])->name('admin.mantenimientos.dias.edit');
+    Route::put('dias-mantenimiento/{dia}', [DiaMantenimientoController::class, 'update'])->name('admin.mantenimientos.dias.update');
 
     // ---- Gestión de personal
     Route::get('tipos-personal/buscar', [TipoPersonalController::class, 'buscar'])->name('admin.tipospersonal.buscar');

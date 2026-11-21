@@ -132,6 +132,8 @@ class Avance02RestriccionesTest extends TestCase
 
     public function test_al_editar_se_vuelven_a_aplicar_todas_las_reglas(): void
     {
+        // Fecha fija: con «hoy + 40 días» cerca de fin de año, las vacaciones cruzaban de un año a otro y la prueba fallaba.
+        $this->travelTo('2026-06-01');
         $persona = $this->persona();
         $primera = $this->vacacion($persona, 10, 5);        // días 10 al 14
         $segunda = $this->vacacion($persona, 30, 5);        // días 30 al 34

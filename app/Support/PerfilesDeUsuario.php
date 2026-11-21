@@ -61,7 +61,7 @@ final class PerfilesDeUsuario
                 'descripcion' => 'Administra los vehículos: colores, marcas, modelos, tipos, vehículos e imágenes.',
                 'permisos' => [
                     ...self::crud('colors'), ...self::crud('brands'), ...self::crud('brandmodels'), ...self::crud('vehicletypes'),
-                    ...self::crud('vehicles', 'vehicles.manage-images'), 'scheduling.view', 'dashboard.view',
+                    ...self::crud('vehicles', 'vehicles.manage-images'), ...self::crud('maintenances'), 'scheduling.view', 'dashboard.view',
                 ],
             ],
             'encargado_personal' => [

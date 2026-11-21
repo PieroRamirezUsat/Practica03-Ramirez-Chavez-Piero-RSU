@@ -787,7 +787,7 @@ return [
         ['text' => 'Inicio', 'route' => 'admin.inicio', 'icon' => 'bi bi-house-door'],
         ['header' => 'OPERACIÓN'],
         [
-            'text' => 'Gestión de vehículos', 'can' => ['colors.view', 'brands.view', 'brandmodels.view', 'vehicletypes.view', 'vehicles.view'],
+            'text' => 'Gestión de vehículos', 'can' => ['colors.view', 'brands.view', 'brandmodels.view', 'vehicletypes.view', 'vehicles.view', 'maintenances.view'],
             'icon' => 'bi bi-truck',
             'submenu' => [
                 ['text' => 'Colores', 'route' => 'admin.colores.index', 'can' => 'colors.view', 'icon' => 'bi bi-palette'],
@@ -795,6 +795,9 @@ return [
                 ['text' => 'Modelos', 'route' => 'admin.modelos.index', 'can' => 'brandmodels.view', 'icon' => 'bi bi-wrench-adjustable'],
                 ['text' => 'Tipos de vehículo', 'route' => 'admin.tiposvehiculo.index', 'can' => 'vehicletypes.view', 'icon' => 'bi bi-truck-flatbed'],
                 ['text' => 'Vehículos', 'route' => 'admin.vehiculos.index', 'can' => 'vehicles.view', 'icon' => 'bi bi-truck-front'],
+                // PRÁCTICA 03: opción MANTENIMIENTO dentro de GESTIÓN DE VEHÍCULOS. 'active' la mantiene resaltada en Horarios y Días.
+                ['text' => 'Mantenimiento', 'route' => 'admin.mantenimientos.index', 'can' => 'maintenances.view', 'icon' => 'bi bi-tools',
+                    'active' => ['admin/mantenimientos*', 'admin/horarios-mantenimiento*', 'admin/dias-mantenimiento*']],
             ],
         ],
         [
@@ -907,6 +910,7 @@ return [
                 ['type' => 'js', 'asset' => true, 'location' => 'js/tads/zonas.js'],
                 ['type' => 'js', 'asset' => true, 'location' => 'js/tads/cambios.js'],
                 ['type' => 'js', 'asset' => true, 'location' => 'js/tads/rutas.js'],
+                ['type' => 'js', 'asset' => true, 'location' => 'js/tads/mantenimientos.js'],   // PRÁCTICA 03
                 ['type' => 'js', 'asset' => true, 'location' => 'js/tads/app-admin.js'],
             ],
         ],

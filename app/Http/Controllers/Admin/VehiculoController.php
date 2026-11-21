@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Concerns\BuscaEnCatalogo;
 use App\Http\Controllers\Admin\Concerns\RespondeAjax;
 use App\Http\Controllers\Controller;
 use App\Models\ColorVehiculo;
+use App\Models\HorarioMantenimiento;
 use App\Models\ImagenVehiculo;
 use App\Models\Marca;
 use App\Models\Modelo;
@@ -110,6 +111,11 @@ class VehiculoController extends Controller
 
         if ($uso = UsoEnProgramacion::deVehiculo($vehiculo->id)) {
             return $this->rechazo("No se puede eliminar: el vehículo está en {$uso}. Márquelo como inactivo.", 'admin.vehiculos.index');
+        }
+
+        // PRÁCTICA 03: tampoco si tiene mantenimientos programados (la BD lo impediría con un error 500).
+        if (HorarioMantenimiento::where('vehicle_id', $vehiculo->id)->exists()) {
+            return $this->rechazo('No se puede eliminar: el vehículo tiene mantenimientos programados. Márquelo como inactivo.', 'admin.vehiculos.index');
         }
 
         $rutas = $vehiculo->imagenes->pluck('image')->all();

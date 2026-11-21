@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Ciudadano;
 
 use App\Http\Controllers\Controller;
-use App\Models\PuntoRecorrido;
 use App\Models\Programacion;
+use App\Models\PuntoRecorrido;
 use App\Services\ServicioCiudadano;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;

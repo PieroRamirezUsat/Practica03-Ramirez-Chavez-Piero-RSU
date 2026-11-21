@@ -68,6 +68,8 @@ final class CatalogoPermisos
                     ['titulo' => 'Vehículos', 'icono' => 'bi-truck-front-fill', 'permisos' => self::crud('vehicles', 'Vehículos', extras: [
                         self::extra('vehicles.manage-images', 'Gestionar Imágenes de Vehículos'),
                     ])],
+                    // PRÁCTICA 03: mantenimiento de vehículos (mantenimientos, sus horarios y sus días).
+                    ['titulo' => 'Mantenimiento', 'icono' => 'bi-tools', 'permisos' => self::crud('maintenances', 'Mantenimientos')],
                 ],
             ],
             [
@@ -130,7 +132,7 @@ final class CatalogoPermisos
         'personal' => 'employees', 'contratos' => 'contracts', 'asistencias' => 'attendances',
         'vacaciones' => 'vacations', 'turnos' => 'shifts', 'zonas' => 'zones', 'feriados' => 'holidays',
         'grupos' => 'employeegroups', 'programaciones' => 'scheduling', 'motivos' => 'reasons',
-        'cambios' => 'scheduling-changes',
+        'cambios' => 'scheduling-changes', 'mantenimientos' => 'maintenances',
     ];
 
     /** Rutas que no siguen la regla general. Un arreglo significa «cualquiera de estos permisos». */

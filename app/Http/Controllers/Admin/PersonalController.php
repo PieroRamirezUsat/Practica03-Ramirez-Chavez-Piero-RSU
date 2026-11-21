@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Concerns\RespondeAjax;
 use App\Http\Controllers\Controller;
 use App\Models\Contrato;
+use App\Models\HorarioMantenimiento;
 use App\Models\Personal;
 use App\Models\TipoPersonal;
 use App\Models\Vacacion;
@@ -218,6 +219,11 @@ class PersonalController extends Controller
 
         if ($uso = UsoEnProgramacion::dePersona($persona->id)) {
             return $this->rechazo("No se puede eliminar: figura en {$uso}. Márquelo como inactivo.", 'admin.personal.index');
+        }
+
+        // PRÁCTICA 03: tampoco si es responsable de algún mantenimiento.
+        if (HorarioMantenimiento::where('responsible_id', $persona->id)->exists()) {
+            return $this->rechazo('No se puede eliminar: es responsable de mantenimientos programados. Márquelo como inactivo.', 'admin.personal.index');
         }
 
         $this->borrarArchivo($persona->profile_photo_path);
